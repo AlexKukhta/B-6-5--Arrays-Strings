@@ -10,7 +10,7 @@ namespace Base.Lesson_6
     {
         static void Main(string[] args)
         {
-            ReplaseInPoem();
+            Pyatnashki();
             Console.ReadLine();
         }
 
@@ -72,8 +72,10 @@ namespace Base.Lesson_6
             Console.WriteLine("ReplaseInPoem");
             Console.WriteLine("Add new poem: ");
 
-            string  poem = Convert.ToString(Console.ReadLine());
-            
+            System.String  poem = Console.ReadLine();
+
+
+
             poem.Split(';');
             
             poem.Replace("o", "a");
@@ -89,67 +91,115 @@ namespace Base.Lesson_6
             int a;
 
             int[,] table = new int[,] { { 0, 1, 2 }, { 3, 4, 5 }, { 6, 7, 8 } };
+            int i = 0;
+            int j = 0;
 
-            for (int i = 0; i < table.GetLength(0); i++)
+            for (i = 0; i < table.GetLength(0); i++)
             {
-                for (int j = 0; j < table.GetLength(1); j++)
+                for (j = 0; j < table.GetLength(1); j++)
                 {
                     Console.Write(table[i,j]);
+                    
                 }
 
                 Console.WriteLine();
             }
 
             Console.WriteLine("Enter 'W', 'A', 'S' or 'D' for changing location: ");
-
+            
             var buttom = Console.ReadKey();
+            i = 0;
+            j = 0;
 
-            for (int i = 0; i < table.GetLength(0); i++)
-            {
-                for (int j = 0; j < table.GetLength(1); j++)
-                {
-                    switch (buttom.KeyChar)
-                        {
+            do
+            { 
+                switch (buttom.KeyChar)
+                    {
                         case 'W':
                         case 'w':
-                            a = table[i,j];
-                            table[i,j] = table[i - 1,j];
-                            table[i - 1,j] = a;
+                            if (i==0)
+                            {
+                                Console.WriteLine("another letter");
+                                
+                            }
+                            else
+                            { 
+                                a = table[i - 1, j];
+                                table[i - 1, j] = table[i, j];
+                                table[i, j]=a;
+                                i --;
+                                
+                            }
+                            
                             break;
 
                         case 'A':
                         case 'a':
-                            a = table[i, j];
-                            table[i, j] = table[i, j-1];
-                            table[i, j-1] = a;
+                            if (j==0)
+                            {
+                                Console.WriteLine("another letter");
+                            }
+                            else
+                            {
+                                a = table[i, j - 1];
+                                table[i, j - 1] = table[i, j];
+                                table[i, j] = a;
+                                j--;
+                            }
                             break;
 
                         case 'S':
                         case 's':
-                            a = table[i, j];
-                            table[i, j] = table[i + 1, j];
-                            table[i + 1, j] = a;
+                            if (i==table.GetLength(1)-1)
+                            {
+                                Console.WriteLine("another letter");
+                                
+                            }
+                            else
+                            {
+                                a = table[i + 1, j];
+                                table[i + 1, j] = table[i, j];
+                                table[i, j] = a;
+                                i++;   
+                            }
                             break;
 
                         case 'D':
                         case 'd':
-                            a = table[i, j];
-                            table[i, j] = table[i, j+1];
-                            table[i, j+1] = a;
+                            if (j == table.GetLength(0) - 1)
+                            {
+                                Console.WriteLine("another letter");
+                            }
+                            else
+                            {
+                                a = table[i, j + 1];
+                                table[i, j + 1] = table[i, j];
+                                table[i, j] = a;
+                                j++;
+                            }
                             break;
-
+                        
                         default:
                             Console.WriteLine("Your buttom isn't correct");
                             break;
-                        }
-                }
+                    }
 
-                Console.WriteLine();
-            }
-            
+                    for (int k = 0; k < table.GetLength(0); k++)
+                    {
+                        for (int n = 0; n < table.GetLength(1); n++)
+                        {
+                            Console.Write(table[k, n]);
+
+                        }
+
+                        Console.WriteLine();
+                    }
+                buttom=Console.ReadKey();
+            } while (buttom.KeyChar!='x');
+            Console.WriteLine("");
 
         }
-
+        
         public static void PoemExample()
         {
             
